@@ -199,13 +199,17 @@ The MIT License (MIT).
     IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+
+Credits
+-------
+- Emmanuel Adegbite author of PyFCM
+- OperaSoftware's twisted-gcmclient.
+- `Lintel Technologies Pvt Ltd <http://lintel.in>`_
+
+Majority of code is taken from PyFCM few lines of twisted code from Opera software's twisted-gcmclient code.
+
 .. |version| image:: http://img.shields.io/pypi/v/txfcm.svg?style=flat-square
     :target: https://pypi.python.org/pypi/txfcm/
 
 .. |license| image:: http://img.shields.io/pypi/l/txfcm.svg?style=flat-square
     :target: https://pypi.python.org/pypi/txfcm/
-
-Credits
--------
-Credits to Emmanuel Adegbite author of PyFCM and OperaSoftware's twisted-gcmclient.
-Majority of code is taken from PyFCM few lines of twisted code from Opera software's twisted-gcmclient code.
