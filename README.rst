@@ -73,6 +73,7 @@ Send notifications using the ``TXFCMNotification`` class:
 
     df.addBoth(got_result)
     reactor.run()
+
 Send a data message.
 
 .. code-block:: python
