@@ -15,7 +15,7 @@ For more information, visit: https://firebase.google.com/docs/cloud-messaging/
 Links
 =====
 
-- Project: https://github.com/olucurious/txfcm
+- Project: https://github.com/linteltechnologies/txfcm
 - PyPi: https://pypi.python.org/pypi/txfcm/
 
 
@@ -31,7 +31,7 @@ Install using pip:
 
     OR
 
-    pip install git+https://github.com/olucurious/txfcm.git
+    pip install git+https://github.com/linteltechnologies/txfcm.git
 
 txfcm supports Android and iOS.
 
@@ -179,7 +179,7 @@ Access response data.
 License
 -------
 
-The MIT License (MIT). Please see LICENSE.rst for more information.
+The MIT License (MIT).
 
 
 ::
@@ -208,4 +208,4 @@ The MIT License (MIT). Please see LICENSE.rst for more information.
 Credits
 -------
 Credits to Emmanuel Adegbite author of PyFCM and OperaSoftware's twisted-gcmclient.
-Majority of code is take from PyFCM few lines of twisted code from Opera software's twisted-gcmclient code.
+Majority of code is taken from PyFCM few lines of twisted code from Opera software's twisted-gcmclient code.
