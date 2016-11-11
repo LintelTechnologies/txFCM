@@ -76,9 +76,9 @@ class ParseResponses(object):
                     return defer.succeed({})
 
                 response.json().addBoth(self.gotParsedResponse)
-            elif response.status_code == 401:
+            elif response.code == 401:
                 raise baseapi.AuthenticationError("There was an error authenticating the sender account")
-            elif response.status_code == 400:
+            elif response.code == 400:
                 raise baseapi.InternalPackageError(response.text)
             else:
                 raise baseapi.FCMServerError("FCM server is temporarily unavailable")
