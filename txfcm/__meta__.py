@@ -8,7 +8,7 @@ __url__ = 'https://github.com/linteltechnologies/txfcm'
 
 __version__ = '0.0.1'
 
-__install_requires__ = ['treq']
+__install_requires__ = ['treq','pyopenssl']
 
 __author__ = 'Godson Gera'
 __email__ = 'godson@lintelindia.com'
