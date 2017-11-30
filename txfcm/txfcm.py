@@ -126,7 +126,8 @@ class TXFCMNotification(TXBaseAPI):
                              body_loc_key=None,
                              body_loc_args=None,
                              title_loc_key=None,
-                             title_loc_args=None):
+                             title_loc_args=None,
+                             extra_kwargs=None):
 
         """
         Send push notification to a single device
@@ -154,6 +155,8 @@ class TXFCMNotification(TXBaseAPI):
                 receive the message. Defaults to ``None``.
             dry_run (bool, optional): If ``True`` no message will be sent but
                 request will be tested.
+            extra_kwargs (dict, optional): Additional arguments. Defaults to
+                ``None`` to avoid mutable default argument
         Returns:
             :dict:`multicast_id(long), success(int), failure(int), canonical_ids(int), results(list)`:
             Response from FCM server.
@@ -164,6 +167,8 @@ class TXFCMNotification(TXBaseAPI):
             InvalidDataError: Invalid data provided
             InternalPackageError: Mostly from changes in the response of FCM, contact the project owner to resolve the issue
         """
+        if extra_kwargs is None:
+            extra_kwargs = {}
         # [registration_id] cos we're sending to a single device
         payload = self.parse_payload(registration_ids=[registration_id],
                                      message_body=message_body,
@@ -182,7 +187,8 @@ class TXFCMNotification(TXBaseAPI):
                                      body_loc_key=body_loc_key,
                                      body_loc_args=body_loc_args,
                                      title_loc_key=title_loc_key,
-                                     title_loc_args=title_loc_args)
+                                     title_loc_args=title_loc_args,
+                                     **extra_kwargs)
 
         return self.send_request([payload])
 
@@ -207,7 +213,8 @@ class TXFCMNotification(TXBaseAPI):
                                 body_loc_key=None,
                                 body_loc_args=None,
                                 title_loc_key=None,
-                                title_loc_args=None):
+                                title_loc_args=None,
+                                extra_kwargs=None):
 
         """
         Sends push notification to multiple devices,
@@ -236,6 +243,8 @@ class TXFCMNotification(TXBaseAPI):
                 receive the message. Defaults to ``None``.
             dry_run (bool, optional): If ``True`` no message will be sent but
                 request will be tested.
+            extra_kwargs (dict, optional): Additional arguments. Defaults to
+                ``None`` to avoid mutable default argument
         Returns:
             :tuple:`multicast_id(long), success(int), failure(int), canonical_ids(int), results(list)`:
             Response from FCM server.
@@ -246,6 +255,8 @@ class TXFCMNotification(TXBaseAPI):
             InvalidDataError: Invalid data provided
             InternalPackageError: JSON parsing error, mostly from changes in the response of FCM, create a new github issue to resolve it.
         """
+        if extra_kwargs is None:
+            extra_kwargs = {}
         if len(registration_ids) > self.FCM_MAX_RECIPIENTS:
             payloads = list()
             registration_id_chunks = self.registration_id_chunks(registration_ids)
@@ -269,7 +280,8 @@ class TXFCMNotification(TXBaseAPI):
                                                    body_loc_key=body_loc_key,
                                                    body_loc_args=body_loc_args,
                                                    title_loc_key=title_loc_key,
-                                                   title_loc_args=title_loc_args))
+                                                   title_loc_args=title_loc_args,
+                                                   **extra_kwargs))
             self.send_request(payloads)
             return self.parse_responses()
         else:
@@ -290,7 +302,8 @@ class TXFCMNotification(TXBaseAPI):
                                          body_loc_key=body_loc_key,
                                          body_loc_args=body_loc_args,
                                          title_loc_key=title_loc_key,
-                                         title_loc_args=title_loc_args)
+                                         title_loc_args=title_loc_args,
+                                         **extra_kwargs)
             return  self.send_request([payload])
             #return self.parse_responses()
 
@@ -315,7 +328,8 @@ class TXFCMNotification(TXBaseAPI):
                                  body_loc_key=None,
                                  body_loc_args=None,
                                  title_loc_key=None,
-                                 title_loc_args=None):
+                                 title_loc_args=None,
+                                 extra_kwargs=None):
 
         """
         Sends push notification to multiple devices subscribe to a topic
@@ -345,6 +359,8 @@ class TXFCMNotification(TXBaseAPI):
                 receive the message. Defaults to ``None``.
             dry_run (bool, optional): If ``True`` no message will be sent but
                 request will be tested.
+            extra_kwargs (dict, optional): Additional arguments. Defaults to
+                ``None`` to avoid mutable default argument
         Returns:
             :tuple:`multicast_id(long), success(int), failure(int), canonical_ids(int), results(list)`:
             Response from FCM server.
@@ -355,6 +371,8 @@ class TXFCMNotification(TXBaseAPI):
             InvalidDataError: Invalid data provided
             InternalPackageError: JSON parsing error, mostly from changes in the response of FCM, create a new github issue to resolve it.
         """
+        if extra_kwargs is None:
+            extra_kwargs = {}
         payload = self.parse_payload(topic_name=topic_name,
                                      condition=condition,
                                      message_body=message_body,
@@ -373,7 +391,8 @@ class TXFCMNotification(TXBaseAPI):
                                      body_loc_key=body_loc_key,
                                      body_loc_args=body_loc_args,
                                      title_loc_key=title_loc_key,
-                                     title_loc_args=title_loc_args)
+                                     title_loc_args=title_loc_args,
+                                     **extra_kwargs)
         return self.send_request([payload])
 
 
