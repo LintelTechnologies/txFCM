@@ -126,7 +126,11 @@ class TXFCMNotification(TXBaseAPI):
                              body_loc_key=None,
                              body_loc_args=None,
                              title_loc_key=None,
-                             title_loc_args=None):
+                             title_loc_args=None,
+                             content_available=None,
+                             timeout=5,
+                             extra_notification_kwargs=None,
+                             extra_kwargs={}):
 
         """
         Send push notification to a single device
@@ -182,7 +186,10 @@ class TXFCMNotification(TXBaseAPI):
                                      body_loc_key=body_loc_key,
                                      body_loc_args=body_loc_args,
                                      title_loc_key=title_loc_key,
-                                     title_loc_args=title_loc_args)
+                                     title_loc_args=title_loc_args,
+                                     content_available=content_available,
+                                     extra_notification_kwargs=extra_notification_kwargs,
+                                     **extra_kwargs)
 
         return self.send_request([payload])
 
@@ -207,7 +214,11 @@ class TXFCMNotification(TXBaseAPI):
                                 body_loc_key=None,
                                 body_loc_args=None,
                                 title_loc_key=None,
-                                title_loc_args=None):
+                                title_loc_args=None,
+                                content_available=None,
+                                timeout=5,
+                                extra_notification_kwargs=None,
+                                extra_kwargs={}):
 
         """
         Sends push notification to multiple devices,
@@ -269,7 +280,10 @@ class TXFCMNotification(TXBaseAPI):
                                                    body_loc_key=body_loc_key,
                                                    body_loc_args=body_loc_args,
                                                    title_loc_key=title_loc_key,
-                                                   title_loc_args=title_loc_args))
+                                                   title_loc_args=title_loc_args,
+                                                   content_available=content_available,
+                                                   extra_notification_kwargs=extra_notification_kwargs,
+                                                   **extra_kwargs))
             self.send_request(payloads)
             return self.parse_responses()
         else:
@@ -315,7 +329,11 @@ class TXFCMNotification(TXBaseAPI):
                                  body_loc_key=None,
                                  body_loc_args=None,
                                  title_loc_key=None,
-                                 title_loc_args=None):
+                                 title_loc_args=None,
+                                 content_available=None,
+                                 timeout=5,
+                                 extra_notification_kwargs=None,
+                                 extra_kwargs={}):
 
         """
         Sends push notification to multiple devices subscribe to a topic
@@ -373,7 +391,10 @@ class TXFCMNotification(TXBaseAPI):
                                      body_loc_key=body_loc_key,
                                      body_loc_args=body_loc_args,
                                      title_loc_key=title_loc_key,
-                                     title_loc_args=title_loc_args)
+                                     title_loc_args=title_loc_args,
+                                     content_available=content_available,
+                                     extra_notification_kwargs=extra_notification_kwargs,
+                                     **extra_kwargs)
         return self.send_request([payload])
 
 

@@ -84,6 +84,9 @@ class BaseAPI(object):
                       body_loc_args=None,
                       title_loc_key=None,
                       title_loc_args=None,
+                      content_available=None,
+                      remove_notification=False,
+                      extra_notification_kwargs={},
                       **extra_kwargs):
 
         """
@@ -104,10 +107,13 @@ class BaseAPI(object):
             # Which is why it's in the `else` block since `condition` is used when multiple topics are being targeted
             if topic_name:
                 fcm_payload['to'] = '/topics/%s' % (topic_name)
+        # Add a object within the payload to set priority of the messages with reference to
+        # https://firebase.google.com/docs/cloud-messaging/concept-options#setting-the-priority-of-a-message
+        # required for legacy http otherwise data messages with priority as high are sent with normal priority
         if low_priority:
-            fcm_payload['priority'] = self.FCM_LOW_PRIORITY
+            fcm_payload['android'] = dict(priority=self.FCM_LOW_PRIORITY)
         else:
-            fcm_payload['priority'] = self.FCM_HIGH_PRIORITY
+            fcm_payload['android'] = dict(priority=self.FCM_HIGH_PRIORITY)
 
         if delay_while_idle:
             fcm_payload['delay_while_idle'] = delay_while_idle
@@ -154,12 +160,18 @@ class BaseAPI(object):
             # otherwise a default sound will play -- even with empty string args.
             if sound:
                 fcm_payload['notification']['sound'] = sound
+            if extra_notification_kwargs:
+                fcm_payload['notification'].update(extra_notification_kwargs)
 
-        else:
-            # This is needed for iOS when we are sending only custom data messages
+        # This is needed for iOS when we are sending only custom data messages
+        if content_available and isinstance(content_available, bool):
             fcm_payload['content_available'] = True
 
         if extra_kwargs:
             fcm_payload.update(extra_kwargs)
+
+        # Do this if only you want to send a data message
+        if remove_notification:
+            del fcm_payload['notification']
 
         return self.json_dumps(fcm_payload)
