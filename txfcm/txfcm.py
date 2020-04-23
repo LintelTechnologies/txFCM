@@ -20,7 +20,7 @@ class TXBaseAPI(baseapi.BaseAPI):
     """
     Base class for txfcm API wrapper for FCM
     """
-    def __init__(self,api_key=None):
+    def __init__(self,api_key=None, debug=False):
         """
 
         :param api_key: FCM API Key string
@@ -29,7 +29,7 @@ class TXBaseAPI(baseapi.BaseAPI):
         TXBaseAPI class don't support sending requests via HTTP Proxies (PyFCM supports Proxies)
         """
         self.http_client = _get_http_client()
-        baseapi.BaseAPI.__init__(self,api_key,None)
+        baseapi.BaseAPI.__init__(self,api_key,None, debug=debug)
 
     def send_request(self, payloads=None):
         """

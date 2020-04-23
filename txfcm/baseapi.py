@@ -1,8 +1,10 @@
 import os
 import json
+import logging
 
 from .errors import *
 
+log = logging.getLogger("TxFCM")
 
 class BaseAPI(object):
     """
@@ -25,7 +27,7 @@ class BaseAPI(object):
     #: wake a sleeping device and open a network connection to your server.
     FCM_HIGH_PRIORITY = 'high'
 
-    def __init__(self, api_key=None, proxy_dict=None):
+    def __init__(self, api_key=None, proxy_dict=None, debug=False):
         """
 
         :type proxy_dict: dict, api_key: string
@@ -40,6 +42,7 @@ class BaseAPI(object):
         if proxy_dict and isinstance(proxy_dict, dict) and (('http' in proxy_dict) or ('https' in proxy_dict)):
             self.FCM_REQ_PROXIES = proxy_dict
         self.send_request_responses = list()
+        self.debug = debug
 
     def request_headers(self):
         return {
@@ -58,6 +61,8 @@ class BaseAPI(object):
 
     def json_dumps(self, data):
         """Standardized json.dumps function with separators and sorted keys set."""
+        if self.debug:
+            log.debug("FCM payload : %s", data)
         return (json.dumps(data, separators=(',', ':'), sort_keys=True)
                 .encode('utf8'))
 
