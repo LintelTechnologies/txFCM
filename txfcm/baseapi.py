@@ -1,7 +1,10 @@
 import os
 import json
+import logging
 
 from .errors import *
+
+log = logging.getLogger("txFCM")
 
 
 class BaseAPI(object):
@@ -58,6 +61,7 @@ class BaseAPI(object):
 
     def json_dumps(self, data):
         """Standardized json.dumps function with separators and sorted keys set."""
+        log.debug("FCM Request Payload : %s", data)
         return (json.dumps(data, separators=(',', ':'), sort_keys=True)
                 .encode('utf8'))
 
