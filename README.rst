@@ -69,7 +69,7 @@ Send notifications using the ``TXFCMNotification`` class:
     df = push_service.notify_multiple_devices(registration_ids=registration_ids, message_title=message_title, message_body=message_body)
 
     def got_result(result):
-        print result
+        print(result)
 
     df.addBoth(got_result)
     reactor.run()
